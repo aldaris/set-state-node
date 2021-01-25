@@ -13,36 +13,22 @@
  * information: "Portions copyright [year] [name of copyright owner]".
  *
  * Copyright 2018 David Luna.
- *
+ * Portions copyright 2021 Identity Fusion Inc.
  */
-
 package com.luna.authentication;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
 
-import javax.inject.Inject;
+import java.util.Map;
 
 import org.forgerock.openam.auth.node.api.AbstractNodeAmPlugin;
 import org.forgerock.openam.auth.node.api.Node;
-import org.forgerock.openam.plugins.PluginException;
-import org.forgerock.openam.sm.AnnotatedServiceRegistry;
 
 /**
  * Core nodes installed by default with no engine dependencies.
  */
 public class SetStateNodePlugin extends AbstractNodeAmPlugin {
-
-    private final AnnotatedServiceRegistry serviceRegistry;
-
-    /**
-     * Basic constructor.
-     *
-     * @param serviceRegistry A service registry instance.
-     */
-    @Inject
-    public SetStateNodePlugin(AnnotatedServiceRegistry serviceRegistry) {
-        this.serviceRegistry = serviceRegistry;
-    }
 
     @Override
     public String getPluginVersion() {
@@ -50,16 +36,7 @@ public class SetStateNodePlugin extends AbstractNodeAmPlugin {
     }
 
     @Override
-    public void onStartup() throws PluginException {
-        for (Class<? extends Node> nodeClass : getNodes()) {
-            pluginTools.registerAuthNode(nodeClass);
-        }
-    }
-
-    @Override
-    protected Iterable<? extends Class<? extends Node>> getNodes() {
-        return asList(
-                SetStateNode.class
-        );
+    protected Map<String, Iterable<? extends Class<? extends Node>>> getNodesByVersion() {
+        return singletonMap("1.0.0", singletonList(SetStateNode.class));
     }
 }

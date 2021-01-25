@@ -14,26 +14,73 @@
  *
  * Copyright 2017 ForgeRock AS.
  * Portions Copyright 2018 David Luna.
- *
+ * Portions copyright 2021 Identity Fusion Inc.
 -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>auth-tree-node-parent</artifactId>
-        <groupId>org.forgerock.am</groupId>
-        <version>5.5.0</version>
-    </parent>
-
-    <artifactId>set-state-node</artifactId>
-
     <groupId>com.luna.authentication</groupId>
-    <version>1.0</version>    
+    <artifactId>set-state-node</artifactId>
+    <version>6.5.3</version>
     <name>Set State Node</name>
     <description>An Authentication Tree Node for ForgeRock's Identity Platform</description>
-    
+
+    <properties>
+        <am.version>6.5.3</am.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.forgerock.am</groupId>
+                <artifactId>openam-auth-trees</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${am.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.forgerock.am</groupId>
+            <artifactId>auth-node-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.forgerock.am</groupId>
+            <artifactId>openam-guice-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.forgerock.am</groupId>
+            <artifactId>openam-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.forgerock.am</groupId>
+            <artifactId>openam-scripting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <repositories>
         <repository>
             <snapshots>
@@ -41,8 +88,7 @@
             </snapshots>
             <id>forgerock-private-releases</id>
             <name>ForgeRock Private Release Repository</name>
-            <url>http://maven.forgerock.org/repo/private-releases</url>
+            <url>https://maven.forgerock.org/repo/private-releases</url>
         </repository>
     </repositories>
-
 </project>
