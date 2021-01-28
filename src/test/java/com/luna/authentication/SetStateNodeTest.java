@@ -23,6 +23,7 @@ import static org.forgerock.json.JsonValue.object;
 import static org.mockito.BDDMockito.given;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.forgerock.openam.auth.node.api.Action;
 import org.forgerock.openam.auth.node.api.ExternalRequestContext;
@@ -80,7 +81,7 @@ public class SetStateNodeTest {
     }
 
     private TreeContext context(Map.Entry<String, Object>... fields) {
-        return new TreeContext(json(object(fields)), request(), emptyList());
+        return new TreeContext(json(object(fields)), request(), emptyList(), Optional.empty());
     }
 
     private ExternalRequestContext request() {
